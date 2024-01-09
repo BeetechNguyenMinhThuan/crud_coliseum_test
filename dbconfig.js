@@ -6,7 +6,8 @@ const sequelize = new Sequelize('coliseum_crud_test', 'root', '', {
 });
 
 function init() {
-    const OfficialTags = require("./models/Tag.js");
+    const Tag = require("./models/Tag");
+    const Badge = require("./models/Badge");
     sequelize
         .sync({
             alter: true,

@@ -2,21 +2,24 @@ const {DataTypes, Model} = require("sequelize");
 const {sequelize} = require("../dbconfig");
 
 
-class Tag extends Model {
+class Badge extends Model {
 }
 
-Tag.init({
-    // Khai báo các trường
-    tag_id: {
+Badge.init({
+    badges_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    tag_ulid: {
+    badges_ulid: {
         type: DataTypes.CHAR(16),
     },
-    tag: {
-        type: DataTypes.STRING(40),
+    badges_name: {
+        type: DataTypes.STRING(20),
+    },
+    badges_url: {
+        type: DataTypes.STRING(2048),
+        allowNull: false
     },
     start_at: {
         type: DataTypes.DATE
@@ -34,5 +37,4 @@ Tag.init({
     deletedAt: 'deleted_at'
 });
 
-// Đồng bộ model với database
-module.exports = Tag
+module.exports = Badge
