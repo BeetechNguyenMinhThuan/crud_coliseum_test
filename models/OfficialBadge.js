@@ -2,10 +2,10 @@ const {DataTypes, Model} = require("sequelize");
 const {sequelize} = require("../dbconfig");
 
 
-class Badge extends Model {
+class OfficialBadge extends Model {
 }
 
-Badge.init({
+OfficialBadge.init({
     badges_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -19,7 +19,6 @@ Badge.init({
     },
     badges_url: {
         type: DataTypes.STRING(2048),
-        allowNull: false
     },
     start_at: {
         type: DataTypes.DATE
@@ -29,12 +28,12 @@ Badge.init({
     },
 }, {
     sequelize,
-    // Cấu hình thêm cho model
-    timestamps: true, // Sequelize sẽ tự động quản lý các cột `createdAt` và `updatedAt`
-    paranoid: true, // Kích hoạt chế độ "paranoid" cho phép sử dụng cột `deletedAt`
+    modelName: 'official_badges',
+    timestamps: true,
+    paranoid: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
     deletedAt: 'deleted_at'
 });
 
-module.exports = Badge
+module.exports = OfficialBadge

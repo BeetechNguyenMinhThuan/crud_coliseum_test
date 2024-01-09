@@ -1,46 +1,39 @@
 const { gql } = require("graphql-tag");
+
 const userSchema = gql`
-  scalar DateTime
-  type User {
-    username: String!
-    email: String!
-    password: String!
-    imageUrl: String
-    createdAt: DateTime
-    updatedAt: DateTime
-  }
+    type User {
+        user_id: ID!
+        user_uuid: String!
+        name: String!
+        s3_url: String!
+        first_login_at: DateTime!
+        last_login_at: DateTime!
+        created_at: DateTime
+        updated_at: DateTime
+        deleted_at: DateTime
+    }
 
-  input RegisterInput {
-    username: String!
-    email: String!
-    password: String!
-    confirmPassword: String!
-  }
+    input createUserInput {
+        user_uuid: String!
+        name: String!
+        s3_url: String!
+        first_login_at: DateTime!
+        last_login_at: DateTime!
+    }
 
-  input LoginInput {
-    username: String!
-    password: String!
-  }
 
-  type CreateUserResponse {
-    success: Boolean!
-    message: String
-  }
+    type CreateUserResponse {
+        success: Boolean!
+        message: String
+    }
 
-  type LoginUserResponse {
-    success: Boolean!
-    message: String
-    access_token: String
-  }
+    extend type Query {
+        getUsers: [User]
+    }
 
-  type Query {
-    getUsers: [User]!
-  }
-
-  type Mutation {
-    register(input: RegisterInput): CreateUserResponse!
-    login(input: LoginInput): LoginUserResponse!
-  }
+    extend type Mutation {
+        createUser(input: createUserInput): CreateUserResponse!
+    }
 `;
 
 module.exports = {

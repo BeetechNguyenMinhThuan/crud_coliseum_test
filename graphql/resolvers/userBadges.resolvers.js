@@ -1,18 +1,18 @@
-const {GraphQLError} = require("graphql/index");
-const Tag = require("../../models/Tag");
-const tagResolver = {
+const {GraphQLError} = require("graphql");
+const OfficialTag = require("../../models/OfficialTag");
+const userBadgesResolver = {
     Query: {
-        getAllTags: async (parent, args, context) => {
+        getAllOfficialTags: async (parent, args, context) => {
             try {
-                return await Tag.findAll();
+                return await OfficialTag.findAll();
             } catch (error) {
                 throw new GraphQLError(error.message);
             }
         },
-        getTagById: async (parent, args, context) => {
+        getOfficialTagById: async (parent, args, context) => {
             try {
                 const {tag_id} = args;
-                return await Tag.findOne({
+                return await OfficialTag.findOne({
                     where: {tag_id: tag_id}
                 });
             } catch (error) {
@@ -21,23 +21,23 @@ const tagResolver = {
         },
     },
     Mutation: {
-        createTag: async (parent, args, context) => {
+        createUserBadge: async (parent, args, context) => {
             try {
                 const {tag_ulid, tag, start_at, finish_at} = args;
-                return await Tag.create({tag_ulid, tag, start_at, finish_at})
+                return await OfficialTag.create({tag_ulid, tag, start_at, finish_at})
             } catch (error) {
                 throw new GraphQLError(error.message);
             }
         },
-        updateTag: async (parent, args, context) => {
+        updateOfficialTag: async (parent, args, context) => {
             try {
                 const {tag_id, tag_ulid, tag, start_at, finish_at} = args;
-                await Tag.update({tag_id, tag_ulid, tag, start_at, finish_at}, {
+                await OfficialTag.update({tag_id, tag_ulid, tag, start_at, finish_at}, {
                     where: {
                         tag_id: tag_id,
                     }
                 })
-                return Tag.findOne({
+                return OfficialTag.findOne({
                     where: {
                         tag_id: tag_id,
                     }
@@ -46,11 +46,11 @@ const tagResolver = {
                 throw new GraphQLError(error.message);
             }
         },
-        deleteTag: async (parent, args, context) => {
+        deleteOfficialTag: async (parent, args, context) => {
             try {
                 const {tag_id} = args;
-                await Tag.destroy({
-                    where: {tag_id:tag_id}
+                await OfficialTag.destroy({
+                    where: {tag_id: tag_id}
                 });
                 return "OK"
             } catch (error) {
@@ -61,5 +61,5 @@ const tagResolver = {
 }
 
 module.exports = {
-    tagResolver,
+    userBadgesResolver,
 };

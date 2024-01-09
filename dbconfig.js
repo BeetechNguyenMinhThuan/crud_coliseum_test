@@ -6,8 +6,13 @@ const sequelize = new Sequelize('coliseum_crud_test', 'root', '', {
 });
 
 function init() {
-    const Tag = require("./models/Tag");
-    const Badge = require("./models/Badge");
+    const OfficialTag = require("./models/OfficialTag");
+    const OfficialBadge = require("./models/OfficialBadge");
+    const User = require("./models/User");
+    const UserLike = require("./models/UserLike");
+    const UserBookmark = require("./models/UserBookmark");
+    const UserBadges = require("./models/UserBadges");
+    const Novel = require("./models/Novel");
     sequelize
         .sync({
             alter: true,

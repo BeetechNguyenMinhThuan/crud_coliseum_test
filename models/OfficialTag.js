@@ -2,10 +2,10 @@ const {DataTypes, Model} = require("sequelize");
 const {sequelize} = require("../dbconfig");
 
 
-class Tag extends Model {
+class OfficialTag extends Model {
 }
 
-Tag.init({
+OfficialTag.init({
     // Khai báo các trường
     tag_id: {
         type: DataTypes.INTEGER,
@@ -26,13 +26,13 @@ Tag.init({
     },
 }, {
     sequelize,
-    // Cấu hình thêm cho model
-    timestamps: true, // Sequelize sẽ tự động quản lý các cột `createdAt` và `updatedAt`
-    paranoid: true, // Kích hoạt chế độ "paranoid" cho phép sử dụng cột `deletedAt`
+    modelName: 'official_tags',
+    timestamps: true,
+    paranoid: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
     deletedAt: 'deleted_at'
 });
 
 // Đồng bộ model với database
-module.exports = Tag
+module.exports = OfficialTag

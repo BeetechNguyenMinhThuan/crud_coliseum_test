@@ -1,3 +1,5 @@
-const {tagResolver} = require("./tags.resolver");
+const {officialTagResolver} = require("./officialTags.resolver");
+const {officialBadgeResolver} = require("./officialBadges.resolver");
+const {userResolver} = require("./users.resolver");
 
-module.exports = [tagResolver];
+module.exports = [officialTagResolver, officialBadgeResolver, userResolver];
