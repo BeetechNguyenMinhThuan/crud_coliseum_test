@@ -13,6 +13,7 @@ function init() {
     const UserBookmark = require("./models/UserBookmark");
     const UserBadges = require("./models/UserBadges");
     const Novel = require("./models/Novel");
+    const Match = require("./models/Match");
     sequelize
         .sync({
             alter: true,
