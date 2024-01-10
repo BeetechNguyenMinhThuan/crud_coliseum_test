@@ -14,6 +14,17 @@ function init() {
     const UserBadges = require("./models/UserBadges");
     const Novel = require("./models/Novel");
     const Match = require("./models/Match");
+    const Episode = require("./models/Episode");
+    const EventComment = require("./models/EventComment");
+    const Event = require("./models/Event");
+    const EventParticipant = require("./models/EventParticipant");
+    const MatchNovel = require("./models/MatchNovel");
+    const MatchVote = require("./models/MatchVote");
+    const NovelBadge = require("./models/NovelBadge");
+    const NovelTag = require("./models/NovelTag");
+    const NovelComment = require("./models/NovelComment");
+    const Round = require("./models/Round");
+    const Template = require("./models/Template");
     sequelize
         .sync({
             alter: true,

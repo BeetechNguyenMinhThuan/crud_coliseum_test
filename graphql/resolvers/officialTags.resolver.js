@@ -1,5 +1,5 @@
 const {GraphQLError} = require("graphql/index");
-const OfficialTag = require("../../models/OfficialTag");
+const {OfficialTag} = require("../../models");
 const officialTagResolver = {
     Query: {
         getAllOfficialTags: async (parent, args, context) => {
@@ -26,6 +26,7 @@ const officialTagResolver = {
                 const {tag_ulid, tag, start_at, finish_at} = args;
                 return await OfficialTag.create({tag_ulid, tag, start_at, finish_at})
             } catch (error) {
+                console.log(error)
                 throw new GraphQLError(error.message);
             }
         },

@@ -1,8 +1,7 @@
-const User = require("../../models/User");
+const {User} = require("../../models");
 const {GraphQLError} = require("graphql");
 const {throwCustomError} = require("../../heplers/errorHandle");
 const {ErrorTypes} = require("../../heplers/errorHandle");
-const OfficialBadge = require("../../models/OfficialBadge");
 const userResolver = {
     Query: {
         getUsers: async (parent, args, context) => {

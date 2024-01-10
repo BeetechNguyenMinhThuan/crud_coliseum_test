@@ -2,22 +2,33 @@ const {DataTypes, Model} = require("sequelize");
 const {sequelize} = require("../dbconfig");
 
 module.exports = (sequelize, DataTypes) => {
-    class UserBookmark extends Model {
+    class MatchVote extends Model {
     }
 
-    UserBookmark.init({
-        user_id: {
+    MatchVote.init({
+        match_vote_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
+            autoIncrement: true
         },
         novel_id: {
             type: DataTypes.INTEGER,
-            primaryKey: true,
+            allowNull: false
+        },
+        vote_count: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        is_titling: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true,
+            allowNull: false
+
         },
     }, {
         sequelize,
-        modelName: 'UserBookmark',
-        tableName: 'user_bookmars',
+        modelName: 'MatchVote',
+        tableName: 'match_votes',
         timestamps: true,
         paranoid: true,
         createdAt: 'created_at',
@@ -25,6 +36,5 @@ module.exports = (sequelize, DataTypes) => {
         deletedAt: 'deleted_at'
     });
 
-// Đồng bộ model với database
-    return UserBookmark
+    return MatchVote
 }

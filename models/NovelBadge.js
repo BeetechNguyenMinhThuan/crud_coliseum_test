@@ -2,22 +2,22 @@ const {DataTypes, Model} = require("sequelize");
 const {sequelize} = require("../dbconfig");
 
 module.exports = (sequelize, DataTypes) => {
-    class UserBookmark extends Model {
+    class NovelBadge extends Model {
     }
 
-    UserBookmark.init({
-        user_id: {
+    NovelBadge.init({
+        novel_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
         },
-        novel_id: {
+        badges_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
         },
     }, {
         sequelize,
-        modelName: 'UserBookmark',
-        tableName: 'user_bookmars',
+        modelName: 'NovelBadge',
+        tableName: 'novel_badges',
         timestamps: true,
         paranoid: true,
         createdAt: 'created_at',
@@ -25,6 +25,5 @@ module.exports = (sequelize, DataTypes) => {
         deletedAt: 'deleted_at'
     });
 
-// Đồng bộ model với database
-    return UserBookmark
+    return NovelBadge
 }

@@ -1,39 +1,32 @@
-const {DataTypes, Model} = require("sequelize");
+const {Model} = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
-    class Match extends Model {
+    class MatchNovel extends Model {
     }
 
-    Match.init({
+    MatchNovel.init({
         match_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        round_id: {
+        novel_id: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        match_uuid: {
-            type: DataTypes.STRING(16),
-        },
-        match_name: {
-            type: DataTypes.STRING(128),
-        },
         vote_count: {
             type: DataTypes.INTEGER,
-            defaultValue: 0
         },
-        winner_count: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0
+        result_type: {
+            type: DataTypes.TINYINT,
         },
-        winner_type: {
-            type: DataTypes.INTEGER,
+        is_post: {
+            type: DataTypes.BOOLEAN,
         }
     }, {
         sequelize,
-        modelName: 'Match',
-        tableName: 'matches',
+        modelName: 'MatchNovel',
+        tableName: 'match_novels',
         timestamps: true,
         paranoid: true,
         createdAt: 'created_at',
@@ -41,5 +34,6 @@ module.exports = (sequelize, DataTypes) => {
         deletedAt: 'deleted_at'
     });
 
-    return Match;
+// Đồng bộ model với database
+    return MatchNovel
 }

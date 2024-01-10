@@ -1,5 +1,5 @@
 const {GraphQLError} = require("graphql");
-const OfficialTag = require("../../models/OfficialTag");
+const {OfficialTag} = require("../../models");
 const userBadgesResolver = {
     Query: {
         getAllOfficialTags: async (parent, args, context) => {

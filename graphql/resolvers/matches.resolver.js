@@ -1,5 +1,5 @@
 const {GraphQLError} = require("graphql/index");
-const Match = require('../../models/Match');
+const {Match} = require('../../models');
 
 const matchResolver = {
     Query: {

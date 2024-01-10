@@ -1,39 +1,40 @@
 const {DataTypes, Model} = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
-    class Match extends Model {
+    class EventComment extends Model {
     }
 
-    Match.init({
-        match_id: {
+    EventComment.init({
+        event_comment_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        round_id: {
+        user_id: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        match_uuid: {
-            type: DataTypes.STRING(16),
-        },
-        match_name: {
-            type: DataTypes.STRING(128),
-        },
-        vote_count: {
+        event_id: {
             type: DataTypes.INTEGER,
-            defaultValue: 0
+            allowNull: false
         },
-        winner_count: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0
+        comment: {
+            type: DataTypes.STRING(2048),
         },
-        winner_type: {
+        score: {
             type: DataTypes.INTEGER,
-        }
+        },
+        is_official_allow: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
+        },
+        response_comment_id: {
+            type: DataTypes.INTEGER,
+        },
     }, {
         sequelize,
-        modelName: 'Match',
-        tableName: 'matches',
+        modelName: 'EventComment',
+        tableName: 'event_comments',
         timestamps: true,
         paranoid: true,
         createdAt: 'created_at',
@@ -41,5 +42,5 @@ module.exports = (sequelize, DataTypes) => {
         deletedAt: 'deleted_at'
     });
 
-    return Match;
+    return EventComment
 }

@@ -2,7 +2,7 @@ const {ApolloServer} = require('@apollo/server');
 const {startStandaloneServer} = require('@apollo/server/standalone');
 const allTypeDefs = require("./graphql/schemas/index.schema");
 const allResolvers = require("./graphql/resolvers/index.resolver");
-const db = require("./dbconfig");
+const {sequelize} = require("./models");
 
 const server = new ApolloServer({
     typeDefs: allTypeDefs,
@@ -19,12 +19,13 @@ const openApolloServer = async () => {
 
 const checkConnectDB = async () => {
     try {
-        await db.sequelize.authenticate();
-        db.init()
+        await sequelize.authenticate();
         console.log("Connection has been established successfully.");
     } catch (error) {
         console.error("Unable to connect to the database:", error);
     }
 };
+
+
 openApolloServer();
 checkConnectDB();
