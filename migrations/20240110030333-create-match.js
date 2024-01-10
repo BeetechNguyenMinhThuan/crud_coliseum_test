@@ -12,6 +12,7 @@ module.exports = {
       },
       round_id: {
         type: Sequelize.INTEGER,
+        primaryKey: true,
         allowNull: false
       },
       match_uuid: {
@@ -46,11 +47,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    await queryInterface.dropTable('matches');
+
   }
 };

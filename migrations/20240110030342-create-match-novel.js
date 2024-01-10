@@ -7,10 +7,11 @@ module.exports = {
       match_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        allowNull: false
       },
       novel_id: {
         type: Sequelize.INTEGER,
+        primaryKey: true,
         allowNull: false
       },
       vote_count: {
@@ -37,11 +38,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    await queryInterface.dropTable('match_novels');
+
   }
 };

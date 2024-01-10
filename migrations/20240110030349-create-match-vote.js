@@ -11,10 +11,12 @@ module.exports = {
       },
       novel_id: {
         type: Sequelize.INTEGER,
+        primaryKey: true,
         allowNull: false
       },
       vote_count: {
         type: Sequelize.INTEGER,
+        primaryKey: true,
         allowNull: false
       },
       is_titling: {
@@ -38,11 +40,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    await queryInterface.dropTable('match_votes');
+
   }
 };
