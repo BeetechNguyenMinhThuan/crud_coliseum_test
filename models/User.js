@@ -1,7 +1,9 @@
 const {DataTypes, Model} = require("sequelize");
-
 module.exports = (sequelize, DataTypes) => {
     class User extends Model {
+        static associate(models) {
+            this.belongsToMany(models.Novel, {through: 'UserLike'});
+        }
     }
 
     User.init({
@@ -27,12 +29,12 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
 
         },
-        first_login_at:{
+        first_login_at: {
             type: DataTypes.DATE,
             allowNull: false
 
         },
-        last_login_at:{
+        last_login_at: {
             type: DataTypes.DATE,
             allowNull: false
         },

@@ -8,5 +8,6 @@ const {novelSchema} = require("./novels.schema");
 const {episodeSchema} = require("./episodes.schema");
 const {eventSchema} = require("./events.schema");
 const {roundSchema} = require("./rounds.schema");
+const {userLikeSchema} = require("./userLikes.schema");
 
-module.exports = [DateTime, officialBadgeSchema, officialTagSchema, userSchema, userBadgeSchema, matchSchema, novelSchema, episodeSchema, eventSchema, roundSchema];
+module.exports = [DateTime, officialBadgeSchema, officialTagSchema, userSchema, userBadgeSchema, userLikeSchema, matchSchema, novelSchema, episodeSchema, eventSchema, roundSchema];

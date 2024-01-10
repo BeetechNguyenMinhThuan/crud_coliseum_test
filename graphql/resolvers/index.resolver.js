@@ -6,5 +6,6 @@ const {novelResolver} = require("./novels.resolver");
 const {episodeResolver} = require("./episodes.resolver");
 const {eventResolver} = require("./events.resolver");
 const {roundResolver} = require("./rounds.resolver");
+const {userLikeResolver} = require("./userLikes.resolvers");
 
-module.exports = [officialTagResolver, officialBadgeResolver, userResolver, matchResolver, novelResolver, episodeResolver, eventResolver,roundResolver];
+module.exports = [officialTagResolver, officialBadgeResolver, userResolver, matchResolver, novelResolver, episodeResolver, eventResolver,roundResolver,userLikeResolver];

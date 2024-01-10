@@ -1,43 +1,44 @@
 const {GraphQLError} = require("graphql");
-const OfficialTag = require("../../models/OfficialTag");
+const {UserLike, User, Novel} = require("../../models");
 const userLikeResolver = {
     Query: {
-        getAllOfficialTags: async (parent, args, context) => {
+        getUserLike: async (parent, args, context) => {
             try {
-                return await OfficialTag.findAll();
-            } catch (error) {
-                throw new GraphQLError(error.message);
-            }
-        },
-        getOfficialTagById: async (parent, args, context) => {
-            try {
-                const {tag_id} = args;
-                return await OfficialTag.findOne({
-                    where: {tag_id: tag_id}
+                const users = await User.findAll({
+                    include: [Novel]
                 });
+                console.log(users)
             } catch (error) {
                 throw new GraphQLError(error.message);
             }
         },
+
     },
     Mutation: {
-        createUserBadge: async (parent, args, context) =>  {
+        createUserLike: async (parent, args, context) => {
             try {
-                const {tag_ulid, tag, start_at, finish_at} = args;
-                return await OfficialTag.create({tag_ulid, tag, start_at, finish_at})
+                const {user_id, novel_id} = args;
+                const user = await User.findOne({
+                    where: {user_id: user_id}
+                });
+
+                const novel = await Novel.findOne({
+                    where: {novel_id: novel_id}
+                });
+                await user.addNovel(novel)
             } catch (error) {
                 throw new GraphQLError(error.message);
             }
         },
-        updateOfficialTag: async (parent, args, context) => {
+        updateUserLike: async (parent, args, context) => {
             try {
                 const {tag_id, tag_ulid, tag, start_at, finish_at} = args;
-                await OfficialTag.update({tag_id, tag_ulid, tag, start_at, finish_at}, {
+                await UserLike.update({tag_id, tag_ulid, tag, start_at, finish_at}, {
                     where: {
                         tag_id: tag_id,
                     }
                 })
-                return OfficialTag.findOne({
+                return UserLike.findOne({
                     where: {
                         tag_id: tag_id,
                     }
@@ -46,10 +47,10 @@ const userLikeResolver = {
                 throw new GraphQLError(error.message);
             }
         },
-        deleteOfficialTag: async (parent, args, context) => {
+        deleteUserLike: async (parent, args, context) => {
             try {
                 const {tag_id} = args;
-                await OfficialTag.destroy({
+                await UserLike.destroy({
                     where: {tag_id: tag_id}
                 });
                 return "OK"
