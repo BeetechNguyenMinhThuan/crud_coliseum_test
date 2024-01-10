@@ -42,6 +42,12 @@ module.exports = (sequelize, DataTypes) => {
         event_type: {
             type: DataTypes.TINYINT,
             allowNull: false,
+            validate: {
+                isIn: {
+                    args: [[1, 2, 3]],
+                    msg: "Giá trị phải là 1, 2, hoặc 3"
+                }
+            }
         },
         is_anonymous: {
             type: DataTypes.BOOLEAN,
