@@ -13,6 +13,15 @@ const userResolver = {
             }
         },
     },
+    User:{
+        novel_like: async (parent, args, context) => {
+            try {
+                return await parent.getNovels();
+            } catch (error) {
+                throw new GraphQLError(error.message);
+            }
+        },
+    },
     Mutation: {
         createUser: async (parent, args, context) => {
             try {

@@ -30,28 +30,12 @@ const userLikeResolver = {
                 throw new GraphQLError(error.message);
             }
         },
-        updateUserLike: async (parent, args, context) => {
-            try {
-                const {tag_id, tag_ulid, tag, start_at, finish_at} = args;
-                await UserLike.update({tag_id, tag_ulid, tag, start_at, finish_at}, {
-                    where: {
-                        tag_id: tag_id,
-                    }
-                })
-                return UserLike.findOne({
-                    where: {
-                        tag_id: tag_id,
-                    }
-                })
-            } catch (error) {
-                throw new GraphQLError(error.message);
-            }
-        },
+
         deleteUserLike: async (parent, args, context) => {
             try {
-                const {tag_id} = args;
+                const {user_id, novel_id} = args;
                 await UserLike.destroy({
-                    where: {tag_id: tag_id}
+                    where: {user_id, novel_id}
                 });
                 return "OK"
             } catch (error) {

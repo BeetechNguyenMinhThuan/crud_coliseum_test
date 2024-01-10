@@ -4,6 +4,10 @@ const User = require("./User")
 const Novel = require("./Novel")
 module.exports = (sequelize, DataTypes) => {
     class UserLike extends Model {
+        static associate(models) {
+            this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
+            this.belongsTo(models.Novel, { foreignKey: 'novel_id', as: 'novel' });
+        }
     }
 
     UserLike.init({

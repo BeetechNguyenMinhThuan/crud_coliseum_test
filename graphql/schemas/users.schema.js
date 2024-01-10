@@ -8,6 +8,7 @@ const userSchema = gql`
         s3_url: String!
         first_login_at: DateTime!
         last_login_at: DateTime!
+        novel_like:[Novel]
         created_at: DateTime
         updated_at: DateTime
         deleted_at: DateTime
