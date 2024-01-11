@@ -30,6 +30,7 @@ const userSchema = gql`
 
     extend type Query {
         getUsers: [User]
+        getUsersPaginate(offset:Int, limit: Int): [User]
     }
 
     extend type Mutation {

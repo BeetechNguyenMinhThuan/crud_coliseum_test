@@ -1,4 +1,4 @@
-const {User} = require("../../models");
+const {User, Novel} = require("../../models");
 const {GraphQLError} = require("graphql");
 const {throwCustomError} = require("../../heplers/errorHandle");
 const {ErrorTypes} = require("../../heplers/errorHandle");
@@ -7,13 +7,29 @@ const userResolver = {
         getUsers: async (parent, args, context) => {
             try {
                 console.log(context.user);
-                return await User.findAll();
+                return await User.findAll({
+                    include: {
+                        model: Novel,
+                    }
+                });
+            } catch (error) {
+                throw new GraphQLError(error.message);
+            }
+        },
+        getUsersPaginate: async (parent, args, context) => {
+            try {
+                const {offset, limit} = args
+                const users = await User.findAll({
+                    offset,
+                    limit,
+                });
+                return users;
             } catch (error) {
                 throw new GraphQLError(error.message);
             }
         },
     },
-    User:{
+    User: {
         novel_like: async (parent, args, context) => {
             try {
                 return await parent.getNovels();

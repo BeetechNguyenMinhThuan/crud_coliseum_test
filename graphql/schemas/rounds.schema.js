@@ -49,6 +49,7 @@ const roundSchema = gql`
     type Mutation {
         createRound(input: RoundInput!): Round
         updateRound(round_id: Int!, input: RoundInput!): Round
+        updateMultipleRound(event_id: Int!, input: RoundInput!): String
         deleteRound(round_id: Int!): String
     }
 
