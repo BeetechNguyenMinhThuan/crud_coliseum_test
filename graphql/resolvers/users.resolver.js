@@ -16,14 +16,20 @@ const userResolver = {
                 throw new GraphQLError(error.message);
             }
         },
-        getUsersPaginate: async (parent, args, context) => {
+        getUsersPaginate: async (parent, {page, limit}, context) => {
             try {
-                const {offset, limit} = args
-                const users = await User.findAll({
+                const offset = (page - 1) * limit;
+                const {count, rows} = await User.findAndCountAll({
                     offset,
-                    limit,
+                    limit
                 });
-                return users;
+
+                return {
+                    users: rows,
+                    totalItems: count,
+                    totalPages: Math.ceil(count / limit),
+                    currentPage: page
+                };
             } catch (error) {
                 throw new GraphQLError(error.message);
             }

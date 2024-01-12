@@ -21,6 +21,13 @@ const userSchema = gql`
         first_login_at: DateTime!
         last_login_at: DateTime!
     }
+    
+    type UserPagination {
+        users: [User!]
+        totalItems: Int
+        totalPages: Int
+        currentPage: Int
+    }
 
 
     type CreateUserResponse {
@@ -30,7 +37,7 @@ const userSchema = gql`
 
     extend type Query {
         getUsers: [User]
-        getUsersPaginate(offset:Int, limit: Int): [User]
+        getUsersPaginate(page:Int, limit: Int): UserPagination
     }
 
     extend type Mutation {
