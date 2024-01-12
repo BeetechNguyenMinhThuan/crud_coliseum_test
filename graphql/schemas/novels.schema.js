@@ -48,7 +48,7 @@ const novelSchema = gql`
     }
     type Query {
         novel(novel_id: Int!): Novel
-        novels: [Novel]
+        novels(page:Int, limit: Int): NovelResult!
     }
 
     type Mutation {
@@ -57,6 +57,16 @@ const novelSchema = gql`
         deleteNovel(novel_id: Int!): String
     }
 
+    type NovelPagination {
+        totalItems: Int!
+        totalPages: Int!
+        currentPage: Int!
+    }
+
+    type NovelResult {
+        novels: [Novel!]!
+        novel_pagination: NovelPagination!
+    }
 `;
 
 module.exports = {

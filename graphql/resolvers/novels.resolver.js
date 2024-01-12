@@ -3,12 +3,17 @@ const {Novel} = require('../../models');
 
 const novelResolver = {
     Query: {
-        novels: async (parent, args, context) => {
-            try {
-                return await Novel.findAll();
-            } catch (error) {
-                throw new GraphQLError(error.message);
-            }
+        novels: async (_, { page, limit }) => {
+            const offset = (page - 1) * limit;
+            const { count, rows } = await Novel.findAndCountAll({ offset, limit });
+            return {
+              novels: rows,
+              novel_pagination: {
+                totalItems: count,
+                totalPages: Math.ceil(count / limit),
+                currentPage: page
+              }
+            };
         },
         novel: async (parent, args, context) => {
             try {
